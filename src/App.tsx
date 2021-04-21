@@ -1,9 +1,13 @@
-import React from "react";
-import "./App.scss";
+import { ThemeProvider } from "@material-ui/styles";
 import Layout from "./components/Layout";
+import MuiTheme from "./mui_theme";
 
 function App() {
-	return <Layout>content</Layout>;
+	return (
+		<ThemeProvider theme={MuiTheme}>
+			<Layout>content</Layout>
+		</ThemeProvider>
+	);
 }
 
 export default App;
