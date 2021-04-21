@@ -9,14 +9,14 @@ const useStyles = makeStyles((theme) => ({
 	},
 	header: {
 		gridArea: "header",
-		border: `2px solid ${theme.palette.text.secondary}`,
+		borderBottom: `2px solid ${theme.palette.text.secondary}`,
 		display: "flex",
 		placeContent: "space-between",
 		placeItems: "center",
 		padding: theme.spacing(2),
 	},
 	header__image: {
-		maxWidth: "200px",
+		maxWidth: "150px",
 	},
 	header__nav: {
 		display: "flex",
@@ -27,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 	footer: {
 		gridArea: "footer",
+		display: "grid",
+		placeContent: "center",
+		borderTop: `2px solid ${theme.palette.text.secondary}`,
 	},
 }));
 
@@ -50,7 +53,9 @@ const Layout = (props: LayoutProps) => {
 					</nav>
 				</header>
 				<main className={styles.main}>{props.children}</main>
-				<footer className={styles.footer}>footer</footer>
+				<footer className={styles.footer}>
+					1UP CARS {new Date().getFullYear()}
+				</footer>
 			</div>
 		</>
 	);
