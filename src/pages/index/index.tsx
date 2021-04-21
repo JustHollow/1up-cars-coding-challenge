@@ -1,5 +1,7 @@
+import CarsList from "./list";
+
 const IndexPage = () => {
-	return <div>index</div>;
+	return <CarsList />;
 };
 
 export default IndexPage;
