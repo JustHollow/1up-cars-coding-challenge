@@ -6,8 +6,9 @@ import {
 	Typography,
 	Link,
 } from "@material-ui/core";
-import { Link as RouterLink } from "react-router-dom";
+import { generatePath, Link as RouterLink } from "react-router-dom";
 import { API_CarsResponse } from "src/api/hooks/cars";
+import { routes } from "src/routes";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 		border: `2px solid ${theme.palette.text.secondary}`,
 		borderRadius: 0,
 	},
-	picture: { width: 80, height: 65, objectFit: "cover" },
+	picture: { width: 80, height: 65, objectFit: "contain" },
 	content: {
 		padding: 0,
 		display: "grid",
@@ -56,7 +57,10 @@ const CarsListItem = (props: CarsListItemProps) => {
 					{props.mileage.unit} - {props.fuelType} -{" "}
 					<span className={classes.capitalizer}>{props.color}</span>
 				</Typography>
-				<Link component={RouterLink} to={`/${props.stockNumber}`}>
+				<Link
+					component={RouterLink}
+					to={generatePath(routes.car.path, { stockNumber: props.stockNumber })}
+				>
 					View details
 				</Link>
 			</CardContent>

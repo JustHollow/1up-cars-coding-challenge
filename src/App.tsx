@@ -3,8 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { Route, BrowserRouter, Switch } from "react-router-dom";
 import Layout from "./components/Layout";
 import MuiTheme from "./mui_theme";
-import Page404 from "./pages/404";
-import IndexPage from "./pages/index";
+import { routes } from "./routes";
 
 function App() {
 	const queryClient = new QueryClient();
@@ -15,12 +14,9 @@ function App() {
 				<BrowserRouter>
 					<Layout>
 						<Switch>
-							<Route exact path="/">
-								<IndexPage />
-							</Route>
-							<Route path="*">
-								<Page404 />
-							</Route>
+							<Route {...routes.index} />
+							<Route {...routes.car} />
+							<Route {...routes[404]} />
 						</Switch>
 					</Layout>
 				</BrowserRouter>

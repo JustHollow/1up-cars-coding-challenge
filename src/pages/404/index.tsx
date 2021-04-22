@@ -6,6 +6,7 @@ import {
 	Typography,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
+import { routes } from "src/routes";
 
 const useStyles = makeStyles({
 	root: { margin: "10vh auto" },
@@ -24,7 +25,7 @@ const Page404 = () => {
 		<Container className={classes.root}>
 			<Grid container spacing={2} className={classes.content}>
 				<Grid item>
-					<Link component={RouterLink} to="/">
+					<Link component={RouterLink} to={routes.index.path}>
 						<img src="/logo.png" alt="1UP Cars logo" className={classes.logo} />
 					</Link>
 				</Grid>
@@ -39,7 +40,7 @@ const Page404 = () => {
 				<Grid>
 					<Typography variant="h2" component="p">
 						You can always go back to the{" "}
-						<Link component={RouterLink} to="/">
+						<Link component={RouterLink} to={routes.index.path}>
 							homepage
 						</Link>
 					</Typography>

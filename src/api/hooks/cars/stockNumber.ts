@@ -2,7 +2,11 @@ import { AxiosResponse } from "axios";
 import { useQuery } from "react-query";
 import restClient from "src/api/client";
 
-export interface CarsStockNumberResponse {
+export interface API_CarsStockNumberResponse {
+	car: Car;
+}
+
+interface Car {
 	stockNumber: number;
 	manufacturerName: string;
 	modelName: string;
@@ -21,15 +25,15 @@ type useCarsStockNumberProps = {
 	stockNumber: number;
 };
 
-const useCarsStockNumber = (props: useCarsStockNumberProps) => {
+const useGetCarsStockNumber = (props: useCarsStockNumberProps) => {
 	return useQuery(
 		`carsStockNumber_${props.stockNumber}`,
-		async (): Promise<AxiosResponse<CarsStockNumberResponse>> => {
-			return await restClient.get<CarsStockNumberResponse>(
+		async (): Promise<AxiosResponse<API_CarsStockNumberResponse>> => {
+			return await restClient.get<API_CarsStockNumberResponse>(
 				`/cars/${props.stockNumber}`
 			);
 		}
 	);
 };
 
-export default useCarsStockNumber;
+export default useGetCarsStockNumber;
