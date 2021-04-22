@@ -7,11 +7,13 @@ import {
 	Link,
 } from "@material-ui/core";
 import { Link as RouterLink } from "react-router-dom";
-import { CarsResponse } from "src/api/hooks/cars";
+import { API_CarsResponse } from "src/api/hooks/cars";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: "flex",
+		display: "grid",
+		gridAutoFlow: "column",
+		gridTemplateColumns: "max-content auto",
 		alignItems: "center",
 		gap: theme.spacing(2),
 		padding: theme.spacing(0),
@@ -22,17 +24,19 @@ const useStyles = makeStyles((theme) => ({
 	picture: { width: 80, height: 65, objectFit: "cover" },
 	content: {
 		padding: 0,
-		display: "flex",
-		flexDirection: "column",
+		display: "grid",
 		gap: 4,
 		"&:last-child": {
 			padding: 0,
 		},
 	},
 	modelName: { fontWeight: "bold" },
+	capitalizer: {
+		textTransform: "capitalize",
+	},
 }));
 
-type CarsListItemProps = CarsResponse["cars"][0];
+type CarsListItemProps = API_CarsResponse["cars"][0];
 const CarsListItem = (props: CarsListItemProps) => {
 	const classes = useStyles();
 
@@ -45,12 +49,12 @@ const CarsListItem = (props: CarsListItemProps) => {
 			/>
 			<CardContent className={classes.content}>
 				<Typography variant="h2" className={classes.modelName}>
-					{props.modelName}
+					{props.manufacturerName} {props.modelName}
 				</Typography>
 				<Typography>
 					Stock # {props.stockNumber} - {props.mileage.number}{" "}
-					{props.mileage.unit} - {props.fuelType} - {props.color}
-					{props.color}
+					{props.mileage.unit} - {props.fuelType} -{" "}
+					<span className={classes.capitalizer}>{props.color}</span>
 				</Typography>
 				<Link component={RouterLink} to={`/${props.stockNumber}`}>
 					View details

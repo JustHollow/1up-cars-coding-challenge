@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
 		maxWidth: "150px",
 	},
 	header__nav: {
-		display: "flex",
+		display: "grid",
+		gridAutoFlow: "column",
 		gap: theme.spacing(2),
 	},
 	main: {

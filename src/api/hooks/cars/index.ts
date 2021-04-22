@@ -2,7 +2,7 @@ import { AxiosResponse } from "axios";
 import { useQuery } from "react-query";
 import restClient from "src/api/client";
 
-export interface CarsResponse {
+export interface API_CarsResponse {
 	cars: Car[];
 	totalPageCount: number;
 	totalCarsCount: number;
@@ -30,15 +30,15 @@ type useCarsProps = {
 	page?: number;
 };
 
-const useCars = (props?: useCarsProps) => {
+const useGetCars = (props?: useCarsProps) => {
 	return useQuery(
-		"cars",
-		async (): Promise<AxiosResponse<CarsResponse>> => {
-			return await restClient.get<CarsResponse>("/cars", {
+		["cars", props?.color, props?.page, props?.manufacturer],
+		async (): Promise<AxiosResponse<API_CarsResponse>> => {
+			return await restClient.get<API_CarsResponse>("/cars", {
 				params: { ...props },
 			});
 		}
 	);
 };
 
-export default useCars;
+export default useGetCars;

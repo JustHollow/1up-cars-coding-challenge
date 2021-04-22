@@ -1,18 +1,20 @@
 import { Grid, makeStyles } from "@material-ui/core";
-import useCars from "src/api/hooks/cars";
+import useGetCars from "src/api/hooks/cars";
+import useSearchParams from "src/hooks/useSearchParams";
 import CarsListItem from "./listItem";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: "flex",
-		flexDirection: "column",
-		gap: theme.spacing(1),
+		display: "grid",
+		gap: theme.spacing(0),
 	},
 }));
 
 const CarsList = () => {
 	const classes = useStyles();
-	const { data, isLoading, isError } = useCars();
+	const query = useSearchParams();
+
+	const { data, isLoading, isError } = useGetCars(query);
 
 	if (isLoading) return <div>loading...</div>;
 	if (isError) return <div>something went wrong</div>;
