@@ -1,21 +1,29 @@
 import {
 	Box,
+	Button,
 	Container,
 	Grid,
 	makeStyles,
+	Paper,
 	Typography,
 } from "@material-ui/core";
 import { useHistory, useParams } from "react-router";
 import useGetCarsStockNumber from "src/api/hooks/cars/stockNumber";
+import useFavouriteCar from "src/hooks/useFavouriteCar";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		display: "flex",
-		flexDirection: "column",
+		display: "grid",
+		gridAutoFlow: "row",
+		gap: theme.spacing(2),
 	},
 	image: {
+		width: "100%",
 		objectFit: "contain",
 		height: "30vh",
+	},
+	container: {
+		display: "flex",
 	},
 	content: {
 		maxWidth: 800,
@@ -25,10 +33,19 @@ const useStyles = makeStyles((theme) => ({
 	capitalizer: {
 		textTransform: "capitalize",
 	},
+	favourite: {
+		padding: theme.spacing(2),
+		display: "flex",
+		flexDirection: "column",
+		"& > button": {
+			placeSelf: "flex-end",
+		},
+	},
 }));
 
 const CarPage = () => {
 	const classes = useStyles();
+	const [checkFavourite, setFavourite, removeFavourite] = useFavouriteCar();
 
 	const history = useHistory();
 	const { stockNumber } = useParams<{ stockNumber: string }>();
@@ -45,10 +62,16 @@ const CarPage = () => {
 
 	const car = data.data.car;
 
+	const isFavourite = checkFavourite(car.stockNumber);
+	const handleFavourite = () =>
+		isFavourite
+			? removeFavourite(car.stockNumber)
+			: setFavourite(car.stockNumber);
+
 	return (
 		<Box className={classes.root}>
 			<img src={car.pictureUrl} alt={car.modelName} className={classes.image} />
-			<Container>
+			<Container className={classes.container}>
 				<Grid container className={classes.content} spacing={1}>
 					<Grid item>
 						<Typography variant="h1">
@@ -70,6 +93,21 @@ const CarPage = () => {
 							conditions.
 						</Typography>
 					</Grid>
+				</Grid>
+				<Grid item>
+					<Paper variant="outlined" className={classes.favourite}>
+						<Typography>
+							if you like this car, click the button and save it in your
+							collection of favourite items
+						</Typography>
+						<Button
+							variant="contained"
+							color={isFavourite ? "secondary" : "primary"}
+							onClick={handleFavourite}
+						>
+							{isFavourite ? "UNFAVOURITE" : "SAVE"}
+						</Button>
+					</Paper>
 				</Grid>
 			</Container>
 		</Box>

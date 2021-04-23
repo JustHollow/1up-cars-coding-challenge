@@ -36,7 +36,7 @@ const MuiTheme = createMuiTheme({
 	},
 	overrides: {
 		MuiButton: {
-			containedPrimary: {
+			contained: {
 				boxShadow: "none",
 				minWidth: 128,
 				minHeight: 32,
@@ -70,6 +70,12 @@ const MuiTheme = createMuiTheme({
 				"& > Popover": {
 					background: "red",
 				},
+			},
+		},
+		MuiPaper: {
+			outlined: {
+				borderColor: colors.grey.base,
+				borderWidth: 2,
 			},
 		},
 	},
