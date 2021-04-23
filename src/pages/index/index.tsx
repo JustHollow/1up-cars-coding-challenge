@@ -2,11 +2,19 @@ import { Container, Grid, makeStyles } from "@material-ui/core";
 import IndexHeader from "./header";
 import CarsList from "./list";
 import Pagination from "./pagination";
-import CarsSorting from "./sorting";
+import CarsFilters from "./filter";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: theme.spacing(1, 2),
+	},
+	list: {
+		maxWidth: "50vw",
+		width: "100%",
+	},
+	pagination: {
+		width: "max-content",
+		margin: "auto",
 	},
 }));
 
@@ -16,18 +24,18 @@ const IndexPage = () => {
 	return (
 		<Container>
 			<Grid container className={classes.root} spacing={2}>
-				<Grid item>
-					<CarsSorting />
+				<Grid item xs={8} md={4}>
+					<CarsFilters />
 				</Grid>
-				<Grid item>
+				<Grid item xs={8} md={8}>
 					<Grid container direction="column" spacing={1}>
 						<Grid item>
 							<IndexHeader />
 						</Grid>
-						<Grid item>
+						<Grid item className={classes.list}>
 							<CarsList />
 						</Grid>
-						<Grid item>
+						<Grid item className={classes.pagination}>
 							<Pagination />
 						</Grid>
 					</Grid>

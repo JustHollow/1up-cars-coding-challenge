@@ -22,12 +22,12 @@ const useSearchParams = () => {
 	const [page, setPage] = useState<number>(qsPage);
 
 	useEffect(() => {
-		const unsub = history.listen((location) => {
+		const unsub = history.listen((location, action) => {
 			const { qsColor, qsManufacturers, qsPage } = parseLocation(location);
 
-			qsColor && setColor(qsColor ?? "");
-			qsManufacturers && setManufacturer(qsManufacturers ?? "");
-			qsPage && setPage(qsPage ?? 1);
+			setColor(qsColor ?? "");
+			setManufacturer(qsManufacturers ?? "");
+			setPage(qsPage ?? 1);
 		});
 
 		return () => unsub();

@@ -21,9 +21,9 @@ const CarsList = () => {
 
 	return (
 		<Grid container className={classes.root}>
-			{data?.data.cars.map((car) => {
+			{data?.data.cars.map((car, idx) => {
 				return (
-					<Grid key={car.stockNumber} item>
+					<Grid key={`${car.stockNumber}_${idx}`} item>
 						<CarsListItem {...car} />
 					</Grid>
 				);

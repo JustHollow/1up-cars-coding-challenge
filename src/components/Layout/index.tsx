@@ -1,4 +1,6 @@
 import { CssBaseline, Link, makeStyles } from "@material-ui/core";
+import { Link as RouterLink } from "react-router-dom";
+import { routes } from "src/routes";
 
 const useStyles = makeStyles((theme) => ({
 	layout: {
@@ -6,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
 		display: "grid",
 		gridTemplateAreas: `"header" "main" "footer"`,
 		gridTemplateRows: "80px auto 80px",
+		background: theme.palette.common.white,
 	},
 	header: {
 		gridArea: "header",
@@ -42,11 +45,13 @@ const Layout = (props: LayoutProps) => {
 			<CssBaseline />
 			<div className={styles.layout}>
 				<header className={styles.header}>
-					<img
-						src="/logo.png"
-						alt="1UP Cars logo"
-						className={styles.header__image}
-					/>
+					<Link component={RouterLink} to={routes.index.path}>
+						<img
+							src="/logo.png"
+							alt="1UP Cars logo"
+							className={styles.header__image}
+						/>
+					</Link>
 					<nav className={styles.header__nav}>
 						<Link color="textPrimary">Purchase</Link>
 						<Link color="textPrimary">My Orders</Link>

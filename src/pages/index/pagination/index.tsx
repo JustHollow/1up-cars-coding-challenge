@@ -1,4 +1,5 @@
 import { makeStyles, Typography } from "@material-ui/core";
+import { useLocation } from "react-router";
 import useGetCars from "src/api/hooks/cars";
 import useSearchParams from "src/hooks/useSearchParams";
 import { routes } from "src/routes";
@@ -16,23 +17,35 @@ const useStyles = makeStyles((theme) => ({
 
 const Pagination = () => {
 	const classes = useStyles();
-	const { page } = useSearchParams();
+	const query = useSearchParams();
+	const location = useLocation();
+	const { data, isLoading, isError } = useGetCars(query);
 
-	const { data, isLoading, isError } = useGetCars();
-
+	const { page } = query;
 	const totalPages = data?.data.totalPageCount ?? 1;
 
 	if (isLoading) {
-		return <div>is loading</div>;
+		return <div>Pagination is loading</div>;
 	}
 
 	if (isError) return <div>something went wrong</div>;
+
+	const generatePageQuery = (val: string) => {
+		const newQuery = new URLSearchParams(location.search);
+		if (!val) {
+			newQuery.delete("page");
+		} else {
+			newQuery.set("page", val);
+		}
+		return newQuery.toString();
+	};
 
 	return (
 		<nav className={classes.root}>
 			<PaginationLink
 				to={{
 					pathname: routes.index.path,
+					search: generatePageQuery(String("")),
 				}}
 			>
 				First
@@ -41,7 +54,7 @@ const Pagination = () => {
 				disabled={page <= 1}
 				to={{
 					pathname: routes.index.path,
-					search: `page=${page - 1}`,
+					search: generatePageQuery(String(page - 1)),
 				}}
 			>
 				Previous
@@ -55,7 +68,7 @@ const Pagination = () => {
 				disabled={page >= totalPages}
 				to={{
 					pathname: routes.index.path,
-					search: `page=${page + 1}`,
+					search: generatePageQuery(String(page + 1)),
 				}}
 			>
 				Next
@@ -63,7 +76,7 @@ const Pagination = () => {
 			<PaginationLink
 				to={{
 					pathname: routes.index.path,
-					search: `page=${totalPages}`,
+					search: generatePageQuery(String(totalPages)),
 				}}
 			>
 				Last

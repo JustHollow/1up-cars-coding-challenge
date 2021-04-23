@@ -33,6 +33,10 @@ const MuiTheme = createMuiTheme({
 				},
 			},
 		},
+		MuiInput: { disableUnderline: true },
+		MuiInputLabel: {
+			shrink: false,
+		},
 	},
 	overrides: {
 		MuiButton: {
@@ -49,26 +53,65 @@ const MuiTheme = createMuiTheme({
 				},
 			},
 		},
+		MuiInputLabel: {
+			formControl: {
+				transform: "unset",
+				transition: "unset",
+				color: colors.grey.dark,
+				position: "relative",
+				fontSize: 14,
+			},
+		},
 		MuiInput: {
-			underline: {
-				"&:before": {
-					display: "none",
-					"&:focus": {
-						display: "none",
-					},
+			formControl: {
+				"label + &": {
+					marginTop: 8,
 				},
 			},
 		},
 		MuiSelect: {
 			icon: { color: colors.grey.base },
 			select: {
-				border: `1px solid ${colors.grey.base}`,
+				width: "100%",
+				color: colors.grey.dark,
+				border: `2px solid ${colors.grey.base}`,
 				paddingLeft: 8,
 				"&:focus": {
 					background: colors.white.base,
 				},
-				"& > Popover": {
-					background: "red",
+			},
+		},
+		MuiMenu: {
+			paper: {
+				boxShadow: "none",
+				marginTop: 8,
+			},
+			list: {
+				padding: 0,
+			},
+		},
+		MuiMenuItem: {
+			root: {
+				transition: "none",
+				border: `2px solid ${colors.grey.base}`,
+				"& + &": {
+					borderTopWidth: 0,
+				},
+				"&:hover": {
+					backgroundColor: colors.orange.base,
+					color: colors.white.base,
+					borderColor: colors.orange.base,
+				},
+				"&$selected": {
+					backgroundColor: colors.white.base,
+					color: colors.orange.dark,
+					borderColor: colors.orange.base,
+					borderTopWidth: 2,
+					"&:hover": {
+						backgroundColor: colors.orange.base,
+						color: colors.white.base,
+						borderColor: colors.orange.base,
+					},
 				},
 			},
 		},
