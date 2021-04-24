@@ -71,43 +71,52 @@ const CarPage = () => {
 	return (
 		<Box className={classes.root}>
 			<img src={car.pictureUrl} alt={car.modelName} className={classes.image} />
-			<Container className={classes.container}>
-				<Grid container className={classes.content} spacing={1}>
-					<Grid item>
-						<Typography variant="h1">
-							{car.manufacturerName} {car.modelName}
-						</Typography>
+			<Container className={classes.container} fixed>
+				<Grid container spacing={2}>
+					<Grid
+						item
+						container
+						className={classes.content}
+						spacing={1}
+						xs={12}
+						md={8}
+					>
+						<Grid item>
+							<Typography variant="h1">
+								{car.manufacturerName} {car.modelName}
+							</Typography>
+						</Grid>
+						<Grid item>
+							<Typography variant="h2">
+								Stock # {car.stockNumber} - {car.mileage.number}{" "}
+								{car.mileage.unit} - {car.fuelType} -{" "}
+								<span className={classes.capitalizer}>{car.color}</span>
+							</Typography>
+						</Grid>
+						<Grid item>
+							<Typography>
+								This car is currently available and can be delivered as soon as
+								tomorrow morning. Please be aware that delivery times shown in
+								this page are not definitive and may change due bad weather
+								conditions.
+							</Typography>
+						</Grid>
 					</Grid>
-					<Grid item>
-						<Typography variant="h2">
-							Stock # {car.stockNumber} - {car.mileage.number}{" "}
-							{car.mileage.unit} - {car.fuelType} -{" "}
-							<span className={classes.capitalizer}>{car.color}</span>
-						</Typography>
+					<Grid item xs={12} md={4}>
+						<Paper variant="outlined" className={classes.favourite}>
+							<Typography>
+								if you like this car, click the button and save it in your
+								collection of favourite items
+							</Typography>
+							<Button
+								variant="contained"
+								color={isFavourite ? "secondary" : "primary"}
+								onClick={handleFavourite}
+							>
+								{isFavourite ? "UNFAVOURITE" : "SAVE"}
+							</Button>
+						</Paper>
 					</Grid>
-					<Grid item>
-						<Typography>
-							This car is currently available and can be delivered as soon as
-							tomorrow morning. Please be aware that delivery times shown in
-							this page are not definitive and may change due bad weather
-							conditions.
-						</Typography>
-					</Grid>
-				</Grid>
-				<Grid item>
-					<Paper variant="outlined" className={classes.favourite}>
-						<Typography>
-							if you like this car, click the button and save it in your
-							collection of favourite items
-						</Typography>
-						<Button
-							variant="contained"
-							color={isFavourite ? "secondary" : "primary"}
-							onClick={handleFavourite}
-						>
-							{isFavourite ? "UNFAVOURITE" : "SAVE"}
-						</Button>
-					</Paper>
 				</Grid>
 			</Container>
 		</Box>

@@ -2,6 +2,7 @@ import { Grid, makeStyles } from "@material-ui/core";
 import useGetCars from "src/api/hooks/cars";
 import useSearchParams from "src/hooks/useSearchParams";
 import CarsListItem from "./listItem";
+import CarsListItemSkeleton from "./listItemSkeleton";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -16,7 +17,14 @@ const CarsList = () => {
 
 	const { data, isLoading, isError } = useGetCars(query);
 
-	if (isLoading) return <div>loading...</div>;
+	if (isLoading)
+		return (
+			<Grid container className={classes.root}>
+				{[...Array(10)].map((_el, idx) => (
+					<CarsListItemSkeleton key={idx} />
+				))}
+			</Grid>
+		);
 	if (isError) return <div>something went wrong</div>;
 
 	return (
