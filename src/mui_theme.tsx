@@ -15,7 +15,7 @@ const MuiTheme = createMuiTheme({
 		},
 		text: { primary: colors.grey.dark, secondary: colors.grey.base },
 	},
-	spacing: [8, 12, 24],
+	spacing: [8, 12, 24, 32, 40, 48, 56, 64, 72, 80, 88],
 	typography: {
 		h1: { fontSize: 32, fontWeight: "bold" },
 		h2: { fontSize: 18, fontWeight: "normal" },
